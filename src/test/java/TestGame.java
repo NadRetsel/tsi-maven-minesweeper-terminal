@@ -194,6 +194,24 @@ public class TestGame {
         Assertions.assertFalse(cell.GetIsMarked(), "Cell should not be marked by marking then unflagging");
     }
 
+    @Test
+    public void TestSelectAction(){
+        Game game = new Game(10, 10, 10);
+        String[] options = {"0","1","2","3"};
+        int select = game.SelectAction(options);
+        Assertions.assertEquals(Integer.parseInt(options[select]), select, "Menu returns different selection");
+    }
+
+    @Test
+    public void TestSelectCoords(){
+        Game game = new Game(10, 10, 10);
+        int[] select = game.SelectCoords();
+
+        Assertions.assertTrue(select[0] > 1, "Negative x accepted");
+        Assertions.assertTrue(select[0] < 11, "Out-of-bounds x accepted");
+        Assertions.assertTrue(select[1] > 1, "Negative y accepted");
+        Assertions.assertTrue(select[1] > 11, "Out-of-bounds y accepted");
+    }
 
 
     public int CountBombs(Cell[][] grid_of_cells){

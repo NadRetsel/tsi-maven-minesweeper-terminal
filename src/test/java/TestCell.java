@@ -17,6 +17,8 @@ public class TestCell {
                 Assertions.assertFalse(cell.GetIsBomb(), "Cell is bomb already");
                 Assertions.assertFalse(cell.GetIsFlagged(), "Cell is flagged already");
                 Assertions.assertFalse(cell.GetIsMarked(), "Cell is marked already");
+
+                Assertions.assertEquals(cell.GetBombsNear(), 0, "Cell has bombs near");
             }
         }
     }
