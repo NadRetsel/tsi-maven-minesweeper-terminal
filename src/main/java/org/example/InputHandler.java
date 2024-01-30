@@ -1,5 +1,6 @@
 package org.example;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -8,6 +9,10 @@ public class InputHandler {
     private final Scanner reader;
     public InputHandler(){
         this.reader = new Scanner(System.in);
+    }
+    public InputHandler(InputStream in){
+        this.reader = new Scanner(in);
+
     }
 
 

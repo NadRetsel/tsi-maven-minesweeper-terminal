@@ -1,81 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InputHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MavenMinesweeperTerminal</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">InputHandler.java</span></div><h1>InputHandler.java</h1><pre class="source lang-java linenums">package org.example;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class InputHandler {
 
     private final Scanner reader;
-<span class="fc" id="L9">    public InputHandler(){</span>
-<span class="fc" id="L10">        this.reader = new Scanner(System.in);</span>
-<span class="fc" id="L11">    }</span>
+<span class="fc" id="L10">    public InputHandler(){</span>
+<span class="fc" id="L11">        this.reader = new Scanner(System.in);</span>
+<span class="fc" id="L12">    }</span>
+<span class="fc" id="L13">    public InputHandler(InputStream in){</span>
+<span class="fc" id="L14">        this.reader = new Scanner(in);</span>
+
+<span class="fc" id="L16">    }</span>
 
 
     // Validate inputs to be an integer
     public int InputInteger(String input_message){
-<span class="nc" id="L16">        int int_input = -1;</span>
+<span class="fc" id="L21">        int int_input = -1;</span>
 
-<span class="nc" id="L18">        boolean valid_input = false;</span>
+<span class="fc" id="L23">        boolean valid_input = false;</span>
         // Keep asking until valid input given
-<span class="nc bnc" id="L20" title="All 2 branches missed.">        while(!valid_input){</span>
-<span class="nc" id="L21">            System.out.println(input_message);</span>
-<span class="nc" id="L22">            String input = this.reader.next();</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        while(!valid_input){</span>
+<span class="fc" id="L26">            System.out.println(input_message);</span>
+<span class="fc" id="L27">            String input = this.reader.next();</span>
 
             // Try to parse String -&gt; int
             try {
-<span class="nc" id="L26">                int_input = Integer.parseInt(input);</span>
-<span class="nc" id="L27">                valid_input = true;</span>
+<span class="fc" id="L31">                int_input = Integer.parseInt(input);</span>
+<span class="fc" id="L32">                valid_input = true;</span>
             }
-<span class="nc" id="L29">            catch(Exception e) {</span>
-<span class="nc" id="L30">                System.out.println(&quot;Input must be an integer. Please try again.&quot;);</span>
-<span class="nc" id="L31">            }</span>
-<span class="nc" id="L32">        }</span>
+<span class="fc" id="L34">            catch(Exception e) {</span>
+<span class="fc" id="L35">                System.out.println(&quot;Input must be an integer. Please try again.&quot;);</span>
+<span class="fc" id="L36">            }</span>
+<span class="fc" id="L37">        }</span>
 
-<span class="nc" id="L34">        return int_input;</span>
+<span class="fc" id="L39">        return int_input;</span>
     }
 
     // Validate inputs to be within integer range
     public int InputInteger(String input_message, Integer min_bound, Integer max_bound){
-<span class="nc" id="L39">        int int_input = -1;</span>
-<span class="nc" id="L40">        boolean within_range = false;</span>
+<span class="fc" id="L44">        int int_input = -1;</span>
+<span class="fc" id="L45">        boolean within_range = false;</span>
         // Keep asking until input within range given
-<span class="nc bnc" id="L42" title="All 2 branches missed.">        while(!within_range) {</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        while(!within_range) {</span>
 
-<span class="nc" id="L44">            int_input = InputInteger(input_message); // Ensure integer is inputted</span>
+<span class="fc" id="L49">            int_input = InputInteger(input_message); // Ensure integer is inputted</span>
 
             try{
-<span class="nc bnc" id="L47" title="All 4 branches missed.">                if(min_bound != null &amp;&amp; int_input &lt; min_bound) throw new OutOfRangeException(); // Lower than minimum bound</span>
-<span class="nc bnc" id="L48" title="All 4 branches missed.">                if(max_bound != null &amp;&amp; int_input &gt; max_bound) throw new OutOfRangeException(); // Higher than maximum bound;</span>
+<span class="pc bpc" id="L52" title="1 of 4 branches missed.">                if(min_bound != null &amp;&amp; int_input &lt; min_bound) throw new OutOfRangeException(); // Lower than minimum bound</span>
+<span class="pc bpc" id="L53" title="1 of 4 branches missed.">                if(max_bound != null &amp;&amp; int_input &gt; max_bound) throw new OutOfRangeException(); // Higher than maximum bound;</span>
 
-<span class="nc" id="L50">                within_range = true; // Input within bounds</span>
+<span class="fc" id="L55">                within_range = true; // Input within bounds</span>
             }
-<span class="nc" id="L52">            catch(OutOfRangeException e){</span>
-<span class="nc" id="L53">                System.out.println(&quot;Input of range. Please try again.&quot;);</span>
-<span class="nc" id="L54">            }</span>
+<span class="fc" id="L57">            catch(OutOfRangeException e){</span>
+<span class="fc" id="L58">                System.out.println(&quot;Input of range. Please try again.&quot;);</span>
+<span class="fc" id="L59">            }</span>
         }
-<span class="nc" id="L56">        return int_input;</span>
+<span class="fc" id="L61">        return int_input;</span>
     }
 
     // Validate inputs to select from option list
     public String InputMenu(String input_message, String[] options){
-<span class="nc" id="L61">        String options_input = &quot;&quot;;</span>
+<span class="nc" id="L66">        String options_input = &quot;&quot;;</span>
 
-<span class="nc" id="L63">        boolean valid_input = false;</span>
+<span class="nc" id="L68">        boolean valid_input = false;</span>
         // Keep asking until one from options chosen
-<span class="nc bnc" id="L65" title="All 2 branches missed.">        while(!valid_input) {</span>
-<span class="nc" id="L66">            System.out.println(input_message);</span>
-<span class="nc" id="L67">            options_input = reader.next().toUpperCase(); // Standardise input to upper case</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        while(!valid_input) {</span>
+<span class="nc" id="L71">            System.out.println(input_message);</span>
+<span class="nc" id="L72">            options_input = reader.next().toUpperCase(); // Standardise input to upper case</span>
             try{
-<span class="nc bnc" id="L69" title="All 2 branches missed.">                if(!Arrays.asList(options).contains(options_input)) throw new UnknownOptionException(); // Input not in option list</span>
-<span class="nc" id="L70">                valid_input = true; // Valid option selected</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">                if(!Arrays.asList(options).contains(options_input)) throw new UnknownOptionException(); // Input not in option list</span>
+<span class="nc" id="L75">                valid_input = true; // Valid option selected</span>
             }
-<span class="nc" id="L72">            catch(UnknownOptionException e){</span>
-<span class="nc" id="L73">                System.out.println(&quot;Input not recognised. Please try again.&quot;);</span>
+<span class="nc" id="L77">            catch(UnknownOptionException e){</span>
+<span class="nc" id="L78">                System.out.println(&quot;Input not recognised. Please try again.&quot;);</span>
 
-<span class="nc" id="L75">            }</span>
+<span class="nc" id="L80">            }</span>
         }
 
-<span class="nc" id="L78">        return options_input;</span>
+<span class="nc" id="L83">        return options_input;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

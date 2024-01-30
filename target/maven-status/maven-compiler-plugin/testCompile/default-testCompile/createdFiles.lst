@@ -1,4 +1,5 @@
 TestSetup.class
 TestGame.class
+TestInputHandler.class
 TestCell.class
 TestGrid.class
