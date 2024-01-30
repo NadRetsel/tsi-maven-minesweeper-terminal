@@ -237,33 +237,35 @@ public class TestGame {
     }
 
 
-    /*
+
     @Test
     public void TestSelectAction(){
         Game game = new Game(10, 10, 10);
+        ByteArrayInputStream in = new ByteArrayInputStream("Test\n5\n2\nN\n2\nY".getBytes());
+        System.setIn(in);
+        game.input_handler = new InputHandler(in);
+
         String[] options = {"0","1","2","3"};
         int select = game.SelectAction(options);
-        Assertions.assertEquals(select, Integer.parseInt(options[select]), "Menu returns different selection");
+        Assertions.assertEquals(2, select, "Menu returns different selection");
     }
 
     @Test
     public void TestSelectCoords(){
-        InputStream sysInBackup = System.in; // backup System.in to restore it later
-
         Game game = new Game(10, 10, 10);
-
-        ByteArrayInputStream in = new ByteArrayInputStream("5\nY\n5\nY".getBytes());
+        ByteArrayInputStream in = new ByteArrayInputStream("Test\n5\n5\nN\n5\n5\nY".getBytes());
         System.setIn(in);
+        game.input_handler = new InputHandler(in);
+
         int[] select = game.SelectCoords();
 
         Assertions.assertTrue(select[0] > 1, "Negative x accepted");
         Assertions.assertTrue(select[0] < 11, "Out-of-bounds x accepted");
         Assertions.assertTrue(select[1] > 1, "Negative y accepted");
-        Assertions.assertTrue(select[1] > 11, "Out-of-bounds y accepted");
+        Assertions.assertTrue(select[1] < 11, "Out-of-bounds y accepted");
 
-        System.setIn(sysInBackup);
     }
-    */
+
 
 
     public int CountBombs(Cell[][] grid_of_cells){

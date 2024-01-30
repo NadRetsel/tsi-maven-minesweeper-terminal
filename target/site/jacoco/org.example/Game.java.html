@@ -6,7 +6,7 @@ import java.util.Random;
 public class Game {
 
 <span class="fc" id="L8">    private final Random rand = new Random();</span>
-<span class="fc" id="L9">    private final InputHandler input_handler = new InputHandler();</span>
+<span class="fc" id="L9">    public InputHandler input_handler = new InputHandler();</span>
     public final Grid grid;
     public final LinkedList&lt;Cell&gt; cells_flagged;
     private final int rows, columns, number_of_bombs;
@@ -57,41 +57,41 @@ public class Game {
 
     // Select to REVEAL, FLAG, MARK
     public int SelectAction(String[] menu_options){
-<span class="nc" id="L60">        int menu_input = -1;</span>
-<span class="nc" id="L61">        boolean menu_confirm = false;</span>
-<span class="nc bnc" id="L62" title="All 2 branches missed.">        while(!menu_confirm) {</span>
-<span class="nc" id="L63">            menu_input = input_handler.InputInteger(&quot;&quot;&quot;</span>
+<span class="fc" id="L60">        int menu_input = -1;</span>
+<span class="fc" id="L61">        boolean menu_confirm = false;</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        while(!menu_confirm) {</span>
+<span class="fc" id="L63">            menu_input = input_handler.InputInteger(&quot;&quot;&quot;</span>
                             Would you like to...
                             0 - REVEAL
                             1 - FLAG/UNFLAG to indicate a potential bomb
                             2 - MARK/UNMARK to place a question mark
                             Please select [0-2]&quot;&quot;&quot;,
-<span class="nc" id="L69">                    0, 2);</span>
+<span class="fc" id="L69">                    0, 2);</span>
 
             // Confirm menu selection
-<span class="nc" id="L72">            String[] options = {&quot;Y&quot;, &quot;N&quot;};</span>
-<span class="nc" id="L73">            String confirm_input = input_handler.InputMenu((&quot;You have chosen to &quot; + menu_options[menu_input] + &quot;. Is this correct? [Y/N]&quot;),</span>
+<span class="fc" id="L72">            String[] options = {&quot;Y&quot;, &quot;N&quot;};</span>
+<span class="fc" id="L73">            String confirm_input = input_handler.InputMenu((&quot;You have chosen to &quot; + menu_options[menu_input] + &quot;. Is this correct? [Y/N]&quot;),</span>
                     options);
 
-<span class="nc bnc" id="L76" title="All 2 branches missed.">            if(confirm_input.equals(&quot;Y&quot;)) menu_confirm = true;</span>
-<span class="nc" id="L77">        }</span>
-<span class="nc" id="L78">        return menu_input;</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">            if(confirm_input.equals(&quot;Y&quot;)) menu_confirm = true;</span>
+<span class="fc" id="L77">        }</span>
+<span class="fc" id="L78">        return menu_input;</span>
     }
     // Select coords to perform action
     public int[] SelectCoords(){
-<span class="nc" id="L82">        int input_x = -1;</span>
-<span class="nc" id="L83">        int input_y = -1;</span>
-<span class="nc" id="L84">        boolean coord_confirm = false;</span>
-<span class="nc bnc" id="L85" title="All 2 branches missed.">        while(!coord_confirm) {</span>
-<span class="nc" id="L86">            input_x = input_handler.InputInteger(&quot;Enter your x-coordinate: &quot;, 1, this.columns) - 1;</span>
-<span class="nc" id="L87">            input_y = input_handler.InputInteger(&quot;Enter your y-coordinate: &quot;, 1, this.rows) - 1;</span>
+<span class="fc" id="L82">        int input_x = -1;</span>
+<span class="fc" id="L83">        int input_y = -1;</span>
+<span class="fc" id="L84">        boolean coord_confirm = false;</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">        while(!coord_confirm) {</span>
+<span class="fc" id="L86">            input_x = input_handler.InputInteger(&quot;Enter your x-coordinate: &quot;, 1, this.columns) - 1;</span>
+<span class="fc" id="L87">            input_y = input_handler.InputInteger(&quot;Enter your y-coordinate: &quot;, 1, this.rows) - 1;</span>
 
-<span class="nc" id="L89">            String[] options = {&quot;Y&quot;, &quot;N&quot;};</span>
-<span class="nc" id="L90">            String confirm_input = input_handler.InputMenu((&quot;You have chosen (&quot; + (input_x+1) + &quot;,&quot; + (input_y+1) +&quot;). Is this correct? [Y/N]&quot;), options);</span>
+<span class="fc" id="L89">            String[] options = {&quot;Y&quot;, &quot;N&quot;};</span>
+<span class="fc" id="L90">            String confirm_input = input_handler.InputMenu((&quot;You have chosen (&quot; + (input_x+1) + &quot;,&quot; + (input_y+1) +&quot;). Is this correct? [Y/N]&quot;), options);</span>
 
-<span class="nc bnc" id="L92" title="All 2 branches missed.">            if(confirm_input.equals(&quot;Y&quot;)) coord_confirm = true;</span>
-<span class="nc" id="L93">        }</span>
-<span class="nc" id="L94">        return new int[]{input_x, input_y};</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">            if(confirm_input.equals(&quot;Y&quot;)) coord_confirm = true;</span>
+<span class="fc" id="L93">        }</span>
+<span class="fc" id="L94">        return new int[]{input_x, input_y};</span>
     }
 
 

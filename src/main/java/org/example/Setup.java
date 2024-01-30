@@ -2,7 +2,7 @@ package org.example;
 
 public class Setup {
 
-    private final InputHandler input_handler = new InputHandler();
+    public InputHandler input_handler = new InputHandler();
 
     // Let the user select a grid to play
     public void SetupGame(){
