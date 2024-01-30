@@ -11,14 +11,14 @@ public class TestCell {
         for (int y = 0; y < rows; ++y) {
             for (int x = 0; x < columns; ++x) {
                 Cell cell = grid.GetCell(x, y);
-                Assertions.assertEquals(cell.GetX(), x, "x = " + x + " expected");
-                Assertions.assertEquals(cell.GetY(), y, "y = " + y + " expected");
+                Assertions.assertEquals(x, cell.GetX(), "x = " + x + " expected");
+                Assertions.assertEquals(y, cell.GetY(), "y = " + y + " expected");
 
                 Assertions.assertFalse(cell.GetIsBomb(), "Cell is bomb already");
                 Assertions.assertFalse(cell.GetIsFlagged(), "Cell is flagged already");
                 Assertions.assertFalse(cell.GetIsMarked(), "Cell is marked already");
 
-                Assertions.assertEquals(cell.GetBombsNear(), 0, "Cell has bombs near");
+                Assertions.assertEquals(0, cell.GetBombsNear(), "Cell has bombs near");
             }
         }
     }

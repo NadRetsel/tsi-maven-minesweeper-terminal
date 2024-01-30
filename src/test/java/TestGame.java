@@ -8,12 +8,12 @@ public class TestGame {
         Game game = new Game(10, 10, 10);
         game.PopulateGrid(game.grid.GetCell(5,5));
         int count_bombs = CountBombs(game.grid.grid_of_cells);
-        Assertions.assertEquals(count_bombs, 10, "10 bombs should be planted");
+        Assertions.assertEquals(10, count_bombs, "10 bombs should be planted");
 
         game = new Game(10, 10, 0);
         game.PopulateGrid(game.grid.GetCell(5,5));
         count_bombs = CountBombs(game.grid.grid_of_cells);
-        Assertions.assertEquals(count_bombs, 0, "0 bombs should be planted");
+        Assertions.assertEquals(0, count_bombs, "0 bombs should be planted");
 
         try {
             game = new Game(10, 10, 1000);
@@ -199,7 +199,7 @@ public class TestGame {
         Game game = new Game(10, 10, 10);
         String[] options = {"0","1","2","3"};
         int select = game.SelectAction(options);
-        Assertions.assertEquals(Integer.parseInt(options[select]), select, "Menu returns different selection");
+        Assertions.assertEquals(select, Integer.parseInt(options[select]), "Menu returns different selection");
     }
 
     @Test
