@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class Game {
+
+    private final Random rand = new Random();
     private final InputHandler input_handler = new InputHandler();
     public final Grid grid;
     private final LinkedList<Cell> cells_flagged;
@@ -217,7 +219,6 @@ public class Game {
     // Randomly plant bombs
     public void PopulateGrid(Cell first_cell){
         int bombs_planted = 0;
-        Random rand = new Random();
 
         // Convert 2D grid into a 1D list
         LinkedList<Cell> possible_cells = new LinkedList<>();

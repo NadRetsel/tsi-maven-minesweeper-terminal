@@ -6,6 +6,8 @@ public class Setup {
 
     // Let the user select a grid to play
     public void SetupGame(){
+        boolean end_setup = false;
+
         while(true) {
 
             System.out.println("===== WELCOME TO MINESWEEPER =====");
@@ -27,7 +29,9 @@ public class Setup {
                     game = new Game(custom_rows, custom_columns, custom_bombs);
                 }
             }
-            game.PlayGame(); // Begin game
+            if(game != null) game.PlayGame(); // Begin game
+            
+            if(end_setup) break;
         }
 
     }
