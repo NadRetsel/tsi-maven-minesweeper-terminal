@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Cell.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MavenMinesweeperTerminal</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">Cell.java</span></div><h1>Cell.java</h1><pre class="source lang-java linenums">package org.example;
+
+public class Cell {
+    private final int x, y;
+
+    private boolean is_bomb, is_flagged, is_marked, is_revealed;
+    private int bombs_near;
+
+<span class="fc" id="L9">    public Cell(int x, int y){</span>
+<span class="fc" id="L10">        this.x              = x;</span>
+<span class="fc" id="L11">        this.y              = y;</span>
+
+<span class="fc" id="L13">        this.is_bomb        = false;</span>
+<span class="fc" id="L14">        this.is_flagged     = false;</span>
+<span class="fc" id="L15">        this.is_marked      = false;</span>
+<span class="fc" id="L16">        this.is_revealed    = false;</span>
+<span class="fc" id="L17">        this.bombs_near     = 0;</span>
+<span class="fc" id="L18">    }</span>
+    public int GetX(){
+<span class="fc" id="L20">        return this.x;</span>
+    }
+    public int GetY(){
+<span class="fc" id="L23">        return this.y;</span>
+    }
+    public boolean GetIsBomb(){
+<span class="fc" id="L26">        return this.is_bomb;</span>
+    }
+    public boolean GetIsRevealed() {
+<span class="fc" id="L29">        return this.is_revealed;</span>
+    }
+    public boolean GetIsFlagged(){
+<span class="fc" id="L32">        return this.is_flagged;</span>
+    }
+    public boolean GetIsMarked(){
+<span class="fc" id="L35">        return this.is_marked;</span>
+    }
+    public int GetBombsNear(){
+<span class="fc" id="L38">        return this.bombs_near;</span>
+    }
+
+    public void SetIsBomb(boolean is_bomb){
+<span class="fc" id="L42">        this.is_bomb = is_bomb;</span>
+<span class="fc" id="L43">    }</span>
+    public void SetIsRevealed(boolean is_revealed){
+<span class="fc" id="L45">        this.is_revealed = is_revealed;</span>
+<span class="fc" id="L46">    }</span>
+    public void SetIsFlagged(boolean is_flagged){
+<span class="fc" id="L48">        this.is_flagged = is_flagged;</span>
+<span class="fc" id="L49">    }</span>
+    public void SetIsMarked(boolean is_marked){
+<span class="fc" id="L51">        this.is_marked = is_marked;</span>
+<span class="fc" id="L52">    }</span>
+    public void IncrementBombsNear(){
+<span class="fc" id="L54">        ++this.bombs_near;</span>
+<span class="fc" id="L55">    }</span>
+
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

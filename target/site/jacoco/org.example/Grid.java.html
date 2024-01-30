@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Grid.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MavenMinesweeperTerminal</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">Grid.java</span></div><h1>Grid.java</h1><pre class="source lang-java linenums">package org.example;
+
+public class Grid {
+     private final int rows, columns;
+     public final Cell[][] grid_of_cells;
+
+     private int cells_remaining;
+
+<span class="fc" id="L9">     public Grid(int rows, int columns){</span>
+<span class="fc" id="L10">         this.rows = rows;</span>
+<span class="fc" id="L11">         this.columns = columns;</span>
+
+<span class="fc" id="L13">         this.grid_of_cells = CreateGrid();</span>
+<span class="fc" id="L14">         this.cells_remaining = this.rows * this.columns;</span>
+<span class="fc" id="L15">     }</span>
+
+     public Cell GetCell(int x, int y){
+<span class="fc" id="L18">         return this.grid_of_cells[x][y];</span>
+     }
+     public int GetCellsRemaining(){
+<span class="fc" id="L21">         return this.cells_remaining;</span>
+     }
+
+
+     // Create a 2D columns x rows array of empty cells
+     public Cell[][] CreateGrid(){
+<span class="fc" id="L27">         Cell[][] grid = new Cell[this.columns][this.rows];</span>
+
+<span class="fc bfc" id="L29" title="All 2 branches covered.">         for(int x = 0; x &lt; this.columns; x++){</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">             for(int y = 0; y &lt; this.rows; y++){</span>
+<span class="fc" id="L31">                 grid[x][y] = new Cell(x,y);</span>
+             }
+         }
+<span class="fc" id="L34">         return grid;</span>
+     }
+
+     // Reveal the current cell and its adjacent neighbours (unless flagged or marked)
+     public void RevealAdjacentCells(Cell current_cell){
+
+         // Reveal current cell
+<span class="fc" id="L41">         current_cell.SetIsRevealed(true);</span>
+<span class="fc" id="L42">         --this.cells_remaining;</span>
+
+<span class="fc" id="L44">         int current_x = current_cell.GetX();</span>
+<span class="fc" id="L45">         int current_y = current_cell.GetY();</span>
+
+         //  Recursively reveal adjacent cells
+<span class="fc bfc" id="L48" title="All 2 branches covered.">         if(current_cell.GetBombsNear() == 0){</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">             for(int adjacent_x = current_x-1; adjacent_x &lt;= current_x+1; adjacent_x++){</span>
+<span class="fc bfc" id="L50" title="All 4 branches covered.">                 if(adjacent_x &lt; 0 || adjacent_x &gt;= this.columns) continue; // Don't check outside-of-grid</span>
+
+<span class="fc bfc" id="L52" title="All 2 branches covered.">                 for(int adjacent_y = current_y-1; adjacent_y &lt;= current_y+1; adjacent_y++){</span>
+<span class="fc bfc" id="L53" title="All 8 branches covered.">                     if(adjacent_y &lt; 0 || adjacent_y &gt;= this.rows || (adjacent_x == current_x &amp;&amp; adjacent_y == current_y)) continue; // Don't check outside-of-grid OR same cell</span>
+
+<span class="fc" id="L55">                     Cell adjacent_cell = this.grid_of_cells[adjacent_x][adjacent_y];</span>
+<span class="pc bpc" id="L56" title="2 of 6 branches missed.">                     if(adjacent_cell.GetIsRevealed() || adjacent_cell.GetIsFlagged() || adjacent_cell.GetIsMarked()) continue; // Don't check if already revealed, flagged, or marked</span>
+<span class="fc" id="L57">                     RevealAdjacentCells(adjacent_cell);</span>
+                 }
+             }
+         }
+<span class="fc" id="L61">     }</span>
+
+
+
+    // Build the string ASCII art of the grid, including a rows and columns label
+    public String GridString(boolean game_in_progress){
+<span class="nc" id="L67">        String grid_string = &quot;&quot;;</span>
+
+
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        for(int y = 0; y &lt; this.rows; y++){</span>
+
+            // Row labels
+<span class="nc" id="L73">            String y_label_padding = &quot; &quot;;</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">            for(int i = 0; i &lt; String.valueOf(this.rows).length() - String.valueOf(y+1).length(); i++)  y_label_padding += &quot; &quot;; // Padding to keep label algined</span>
+<span class="nc" id="L75">            grid_string += AnsiColours.WHITE_BACKGROUND_BRIGHT + AnsiColours.BLACK_BOLD + &quot; &quot; + (y+1) + y_label_padding + AnsiColours.RESET;</span>
+
+<span class="nc bnc" id="L77" title="All 2 branches missed.">            for (int x = 0; x &lt; this.columns; x++) {</span>
+<span class="nc" id="L78">                Cell c = this.grid_of_cells[x][y];</span>
+
+<span class="nc bnc" id="L80" title="All 2 branches missed.">                grid_string += c.GetIsRevealed() // If cell revealed -&gt; Show number or bomb / Otherwise -&gt; Flagged, marked, empty</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">                        ? &quot; &quot; + (c.GetIsBomb()</span>
+<span class="nc" id="L82">                            ? AnsiColours.RED + &quot;*&quot;</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">                            :  c.GetBombsNear() == 0</span>
+<span class="nc" id="L84">                                ? AnsiColours.CYAN + &quot;-&quot;</span>
+<span class="nc" id="L85">                                : AnsiColours.YELLOW + c.GetBombsNear()) + AnsiColours.RESET + &quot; &quot;</span>
+<span class="nc bnc" id="L86" title="All 4 branches missed.">                        : &quot;[&quot; + (c.GetIsBomb() &amp;&amp; !game_in_progress</span>
+<span class="nc bnc" id="L87" title="All 4 branches missed.">                            ? AnsiColours.RED + (c.GetIsFlagged() ? AnsiColours.GREEN_BACKGROUND : (c.GetIsMarked() ? AnsiColours.PURPLE_BACKGROUND : &quot;&quot;)) + &quot;*&quot;</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">                            : c.GetIsFlagged()</span>
+<span class="nc" id="L89">                                ? AnsiColours.GREEN + &quot;F&quot;</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">                                : c.GetIsMarked()</span>
+<span class="nc" id="L91">                                    ? AnsiColours.PURPLE + &quot;?&quot;</span>
+<span class="nc" id="L92">                                    : &quot; &quot;) + AnsiColours.RESET + &quot;]&quot;;</span>
+
+                // Column padding to keep aligned based on largest column label
+<span class="nc" id="L95">                String column_padding = &quot;&quot;;</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">                for(int i = 0; i &lt; String.valueOf(this.columns).length(); i++)  column_padding += &quot; &quot;;</span>
+<span class="nc" id="L97">                grid_string += column_padding;</span>
+            }
+<span class="nc" id="L99">            grid_string += &quot;\n&quot;;</span>
+        }
+
+        // Column labels
+<span class="nc" id="L103">        String x_label = &quot; &quot; + &quot; &quot;;</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        for(int i = 0; i &lt; String.valueOf(this.rows).length(); i++)  x_label += &quot; &quot;;</span>
+
+        // Padding
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        for(int x = 0; x &lt; this.columns; x++){</span>
+<span class="nc" id="L108">            x_label += (x+1);</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">            for(int i = 0; i &lt; 3 + String.valueOf(this.columns).length() - String.valueOf(x+1).length(); i++)  x_label += &quot; &quot;;</span>
+        }
+<span class="nc" id="L111">        grid_string =  (AnsiColours.WHITE_BACKGROUND_BRIGHT + AnsiColours.BLACK_BOLD) + &quot; &quot; + x_label + AnsiColours.RESET + &quot;\n&quot; + grid_string; // Add column x labels to the string</span>
+
+<span class="nc" id="L113">        return grid_string;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
