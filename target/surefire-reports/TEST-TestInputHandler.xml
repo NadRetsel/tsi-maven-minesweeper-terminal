@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="TestInputHandler" time="0.002" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="TestInputHandler" time="0.007" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/dls/Documents/The Software Institute/Training Projects/MavenMinesweeperTerminal/target/surefire/surefirebooter-20240130154305538_3.jar /Users/dls/Documents/The Software Institute/Training Projects/MavenMinesweeperTerminal/target/surefire 2024-01-30T15-43-05_482-jvmRun1 surefire-20240130154305538_1tmp surefire_0-20240130154305538_2tmp"/>
+    <property name="sun.java.command" value="/Users/dls/Documents/The Software Institute/Training Projects/MavenMinesweeperTerminal/target/surefire/surefirebooter-20240130161640539_3.jar /Users/dls/Documents/The Software Institute/Training Projects/MavenMinesweeperTerminal/target/surefire 2024-01-30T16-16-40_475-jvmRun1 surefire-20240130161640539_1tmp surefire_0-20240130161640539_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/dls/Documents/The Software Institute/Training Projects/MavenMinesweeperTerminal/target/test-classes:/Users/dls/Documents/The Software Institute/Training Projects/MavenMinesweeperTerminal/target/classes:/Users/dls/.m2/repository/org/junit/jupiter/junit-jupiter/5.9.2/junit-jupiter-5.9.2.jar:/Users/dls/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.2/junit-jupiter-api-5.9.2.jar:/Users/dls/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/dls/.m2/repository/org/junit/platform/junit-platform-commons/1.9.2/junit-platform-commons-1.9.2.jar:/Users/dls/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/dls/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.9.2/junit-jupiter-params-5.9.2.jar:/Users/dls/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.2/junit-jupiter-engine-5.9.2.jar:/Users/dls/.m2/repository/org/junit/platform/junit-platform-engine/1.9.2/junit-platform-engine-1.9.2.jar:/Users/dls/.m2/repository/org/jacoco/jacoco-maven-plugin/0.8.11/jacoco-maven-plugin-0.8.11.jar:/Users/dls/.m2/repository/org/codehaus/plexus/plexus-utils/3.0.24/plexus-utils-3.0.24.jar:/Users/dls/.m2/repository/org/apache/maven/shared/file-management/3.1.0/file-management-3.1.0.jar:/Users/dls/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/Users/dls/.m2/repository/commons-io/commons-io/2.11.0/commons-io-2.11.0.jar:/Users/dls/.m2/repository/org/apache/maven/reporting/maven-reporting-api/3.0/maven-reporting-api-3.0.jar:/Users/dls/.m2/repository/org/apache/maven/doxia/doxia-sink-api/1.0/doxia-sink-api-1.0.jar:/Users/dls/.m2/repository/org/jacoco/org.jacoco.agent/0.8.11/org.jacoco.agent-0.8.11-runtime.jar:/Users/dls/.m2/repository/org/jacoco/org.jacoco.core/0.8.11/org.jacoco.core-0.8.11.jar:/Users/dls/.m2/repository/org/ow2/asm/asm/9.6/asm-9.6.jar:/Users/dls/.m2/repository/org/ow2/asm/asm-commons/9.6/asm-commons-9.6.jar:/Users/dls/.m2/repository/org/ow2/asm/asm-tree/9.6/asm-tree-9.6.jar:/Users/dls/.m2/repository/org/jacoco/org.jacoco.report/0.8.11/org.jacoco.report-0.8.11.jar:"/>
@@ -29,7 +29,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/dls/Documents/The Software Institute/Training Projects/MavenMinesweeperTerminal/target/surefire/surefirebooter-20240130154305538_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/dls/Documents/The Software Institute/Training Projects/MavenMinesweeperTerminal/target/surefire/surefirebooter-20240130161640539_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="21.0.2+13-LTS-58"/>
@@ -67,6 +67,14 @@ Input must be an integer. Please try again.
 Input of range. Please try again.
 
 Input of range. Please try again.
+
+]]></system-out>
+  </testcase>
+  <testcase name="TestInputMenu" classname="TestInputHandler" time="0.004">
+    <system-out><![CDATA[
+Input not recognised. Please try again.
+
+Input not recognised. Please try again.
 
 ]]></system-out>
   </testcase>

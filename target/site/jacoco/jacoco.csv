@@ -6,5 +6,5 @@ MavenMinesweeperTerminal,org.example,Game,266,330,26,50,49,89,19,28,3,5
 MavenMinesweeperTerminal,org.example,Setup,167,0,17,0,30,0,13,0,3,0
 MavenMinesweeperTerminal,org.example,Cell,0,68,0,0,0,26,0,13,0,13
 MavenMinesweeperTerminal,org.example,AnsiColours,3,0,0,0,1,0,1,0,1,0
-MavenMinesweeperTerminal,org.example,UnknownOptionException,3,0,0,0,2,0,1,0,1,0
-MavenMinesweeperTerminal,org.example,InputHandler,33,84,6,10,11,29,5,8,1,4
+MavenMinesweeperTerminal,org.example,UnknownOptionException,0,3,0,0,0,2,0,1,0,1
+MavenMinesweeperTerminal,org.example,InputHandler,0,117,2,14,0,40,2,11,0,5

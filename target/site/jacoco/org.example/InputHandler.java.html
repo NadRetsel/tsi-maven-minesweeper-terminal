@@ -63,24 +63,23 @@ public class InputHandler {
 
     // Validate inputs to select from option list
     public String InputMenu(String input_message, String[] options){
-<span class="nc" id="L66">        String options_input = &quot;&quot;;</span>
+<span class="fc" id="L66">        String options_input = &quot;&quot;;</span>
 
-<span class="nc" id="L68">        boolean valid_input = false;</span>
+<span class="fc" id="L68">        boolean valid_input = false;</span>
         // Keep asking until one from options chosen
-<span class="nc bnc" id="L70" title="All 2 branches missed.">        while(!valid_input) {</span>
-<span class="nc" id="L71">            System.out.println(input_message);</span>
-<span class="nc" id="L72">            options_input = reader.next().toUpperCase(); // Standardise input to upper case</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        while(!valid_input) {</span>
+<span class="fc" id="L71">            System.out.println(input_message);</span>
+<span class="fc" id="L72">            options_input = reader.next().toUpperCase(); // Standardise input to upper case</span>
             try{
-<span class="nc bnc" id="L74" title="All 2 branches missed.">                if(!Arrays.asList(options).contains(options_input)) throw new UnknownOptionException(); // Input not in option list</span>
-<span class="nc" id="L75">                valid_input = true; // Valid option selected</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">                if(!Arrays.asList(options).contains(options_input)) throw new UnknownOptionException(); // Input not in option list</span>
+<span class="fc" id="L75">                valid_input = true; // Valid option selected</span>
             }
-<span class="nc" id="L77">            catch(UnknownOptionException e){</span>
-<span class="nc" id="L78">                System.out.println(&quot;Input not recognised. Please try again.&quot;);</span>
+<span class="fc" id="L77">            catch(UnknownOptionException e){</span>
+<span class="fc" id="L78">                System.out.println(&quot;Input not recognised. Please try again.&quot;);</span>
 
-<span class="nc" id="L80">            }</span>
+<span class="fc" id="L80">            }</span>
         }
-
-<span class="nc" id="L83">        return options_input;</span>
+<span class="fc" id="L82">        return options_input;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

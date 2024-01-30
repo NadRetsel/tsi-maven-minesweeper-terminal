@@ -79,7 +79,6 @@ public class InputHandler {
 
             }
         }
-
         return options_input;
     }
 }
