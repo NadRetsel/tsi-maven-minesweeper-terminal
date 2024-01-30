@@ -86,11 +86,20 @@ public class TestGame {
         game.MarkCell(cell);
         Assertions.assertTrue(cell.GetIsRevealed(), "Cell should still be revealed by marking");
 
-        game = new Game(10, 10, 10);
-        game.grid.grid_of_cells[0][1].SetIsBomb(true);
+        game = new Game(10, 10, 50);
         game.RevealCell(game.grid.grid_of_cells[0][0]);
-        game.RevealCell(game.grid.grid_of_cells[0][1]);
-        Assertions.assertFalse(game.game_in_progress, "Bomb planted not found");
+        boolean bomb_found = false;
+        for(int x = 0; x < 10; ++x){
+            for(int y = 0; y < 10; ++y){
+                cell = game.grid.grid_of_cells[x][y];
+                if(cell.GetIsBomb()) {
+                    game.RevealCell(cell);
+                    bomb_found = true;
+                    break;
+                }
+            }
+        }
+        Assertions.assertTrue(bomb_found && !game.game_in_progress, "No bomb found");
 
 
         game = new Game(10, 10, 10);

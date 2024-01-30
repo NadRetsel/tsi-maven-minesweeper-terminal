@@ -124,12 +124,12 @@ public class Game {
         }
 
         // Cell is bomb -&gt; End game
-<span class="pc bpc" id="L127" title="1 of 2 branches missed.">        if(cell_selected.GetIsBomb()){</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">        if(cell_selected.GetIsBomb()){</span>
 
-<span class="nc" id="L129">            this.grid.RevealAdjacentCells(cell_selected);</span>
-<span class="nc" id="L130">            System.out.println(&quot;Bomb exploded. GAME OVER.&quot;);</span>
-<span class="nc" id="L131">            this.game_in_progress = false;</span>
-<span class="nc" id="L132">            return;</span>
+<span class="fc" id="L129">            this.grid.RevealAdjacentCells(cell_selected);</span>
+<span class="fc" id="L130">            System.out.println(&quot;Bomb exploded. GAME OVER.&quot;);</span>
+<span class="fc" id="L131">            this.game_in_progress = false;</span>
+<span class="fc" id="L132">            return;</span>
         }
 
         // Reveal selected and adjacent cells if not bomb or flagged
@@ -137,9 +137,9 @@ public class Game {
 <span class="fc" id="L137">            this.grid.RevealAdjacentCells(cell_selected);</span>
 
             // End game if cells left = number of bombs
-<span class="pc bpc" id="L140" title="1 of 2 branches missed.">            if(this.grid.GetCellsRemaining() == this.number_of_bombs){</span>
-<span class="nc" id="L141">                System.out.println(&quot;Ending game. ALL BOMBS FOUND.&quot;);</span>
-<span class="nc" id="L142">                this.game_in_progress = false;</span>
+<span class="fc bfc" id="L140" title="All 2 branches covered.">            if(this.grid.GetCellsRemaining() == this.number_of_bombs){</span>
+<span class="fc" id="L141">                System.out.println(&quot;Ending game. ALL BOMBS FOUND.&quot;);</span>
+<span class="fc" id="L142">                this.game_in_progress = false;</span>
             }
 <span class="fc" id="L144">            return;</span>
         }
