@@ -10,7 +10,7 @@ public class Game {
     public final Grid grid;
     private final LinkedList<Cell> cells_flagged;
     private final int rows, columns, number_of_bombs;
-    private boolean first_move, game_in_progress;
+    public boolean first_move, game_in_progress;
 
     public Game(int rows, int columns, int number_of_bombs){
         this.rows = rows;

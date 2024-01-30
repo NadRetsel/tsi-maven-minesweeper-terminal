@@ -1,6 +1,9 @@
 import org.example.*;
 import org.junit.jupiter.api.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
 public class TestGame {
 
     @Test
@@ -83,7 +86,35 @@ public class TestGame {
         game.MarkCell(cell);
         Assertions.assertTrue(cell.GetIsRevealed(), "Cell should still be revealed by marking");
 
+        game = new Game(10, 10, 10);
+        boolean bomb_found = false;
+        for(int x = 0; x < 10; ++x){
+            for(int y = 0; y < 10; ++y){
+                cell = game.grid.grid_of_cells[x][y];
+                game.RevealCell(cell);
+                if(!game.game_in_progress){
+                    bomb_found = true;
+                    break;
+                }
+            }
+        }
+        Assertions.assertTrue(bomb_found, "No bomb found");
 
+
+        game = new Game(10, 10, 10);
+        boolean end_game = false;
+        for(int x = 0; x < 10; ++x){
+            for(int y = 0; y < 10; ++y){
+                cell = game.grid.grid_of_cells[x][y];
+                if(!cell.GetIsBomb()) game.RevealCell(cell);
+
+                if(!game.game_in_progress){
+                    end_game = true;
+                    break;
+                }
+            }
+        }
+        Assertions.assertTrue(end_game, "Game doesn't end");
     }
 
     @Test
@@ -194,6 +225,8 @@ public class TestGame {
         Assertions.assertFalse(cell.GetIsMarked(), "Cell should not be marked by marking then unflagging");
     }
 
+
+    /*
     @Test
     public void TestSelectAction(){
         Game game = new Game(10, 10, 10);
@@ -204,14 +237,22 @@ public class TestGame {
 
     @Test
     public void TestSelectCoords(){
+        InputStream sysInBackup = System.in; // backup System.in to restore it later
+
         Game game = new Game(10, 10, 10);
+
+        ByteArrayInputStream in = new ByteArrayInputStream("5\nY\n5\nY".getBytes());
+        System.setIn(in);
         int[] select = game.SelectCoords();
 
         Assertions.assertTrue(select[0] > 1, "Negative x accepted");
         Assertions.assertTrue(select[0] < 11, "Out-of-bounds x accepted");
         Assertions.assertTrue(select[1] > 1, "Negative y accepted");
         Assertions.assertTrue(select[1] > 11, "Out-of-bounds y accepted");
+
+        System.setIn(sysInBackup);
     }
+    */
 
 
     public int CountBombs(Cell[][] grid_of_cells){

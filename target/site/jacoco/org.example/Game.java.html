@@ -4,92 +4,94 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class Game {
-<span class="fc" id="L7">    private final InputHandler input_handler = new InputHandler();</span>
+
+<span class="fc" id="L8">    private final Random rand = new Random();</span>
+<span class="fc" id="L9">    private final InputHandler input_handler = new InputHandler();</span>
     public final Grid grid;
     private final LinkedList&lt;Cell&gt; cells_flagged;
     private final int rows, columns, number_of_bombs;
-    private boolean first_move, game_in_progress;
+    public boolean first_move, game_in_progress;
 
-<span class="fc" id="L13">    public Game(int rows, int columns, int number_of_bombs){</span>
-<span class="fc" id="L14">        this.rows = rows;</span>
-<span class="fc" id="L15">        this.columns = columns;</span>
-<span class="fc" id="L16">        this.number_of_bombs = number_of_bombs;</span>
+<span class="fc" id="L15">    public Game(int rows, int columns, int number_of_bombs){</span>
+<span class="fc" id="L16">        this.rows = rows;</span>
+<span class="fc" id="L17">        this.columns = columns;</span>
+<span class="fc" id="L18">        this.number_of_bombs = number_of_bombs;</span>
 
-<span class="fc" id="L18">        this.grid = new Grid(this.rows,this.columns);</span>
-<span class="fc" id="L19">        this.first_move = true;</span>
-<span class="fc" id="L20">        this.cells_flagged = new LinkedList&lt;&gt;();</span>
-<span class="fc" id="L21">    }</span>
+<span class="fc" id="L20">        this.grid = new Grid(this.rows,this.columns);</span>
+<span class="fc" id="L21">        this.first_move = true;</span>
+<span class="fc" id="L22">        this.cells_flagged = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L23">    }</span>
     public void PlayGame(){
 
-<span class="nc" id="L24">        this.game_in_progress = true;</span>
-<span class="nc" id="L25">        String[] menu_options = {&quot;REVEAL&quot;, &quot;FLAG/UNFLAG&quot;, &quot;MARK/UNMARK&quot;};</span>
-<span class="nc bnc" id="L26" title="All 2 branches missed.">        while(this.game_in_progress){</span>
+<span class="nc" id="L26">        this.game_in_progress = true;</span>
+<span class="nc" id="L27">        String[] menu_options = {&quot;REVEAL&quot;, &quot;FLAG/UNFLAG&quot;, &quot;MARK/UNMARK&quot;};</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        while(this.game_in_progress){</span>
 
             // Display grid and stats
-<span class="nc" id="L29">            System.out.println(this.grid.GridString(this.game_in_progress));</span>
-<span class="nc" id="L30">            System.out.println(&quot;There are &quot; + this.grid.GetCellsRemaining() + &quot; cells remaining.&quot;);</span>
-<span class="nc" id="L31">            System.out.println(this.cells_flagged.size() + &quot;/&quot; + this.number_of_bombs + &quot; cells flagged.&quot;);</span>
+<span class="nc" id="L31">            System.out.println(this.grid.GridString(this.game_in_progress));</span>
+<span class="nc" id="L32">            System.out.println(&quot;There are &quot; + this.grid.GetCellsRemaining() + &quot; cells remaining.&quot;);</span>
+<span class="nc" id="L33">            System.out.println(this.cells_flagged.size() + &quot;/&quot; + this.number_of_bombs + &quot; cells flagged.&quot;);</span>
 
-<span class="nc" id="L33">            int menu_input = SelectAction(menu_options); // Choose to REVEAL, FLAG, MARK</span>
-<span class="nc" id="L34">            int[] coords = SelectCoords(); // Select cell to do action</span>
+<span class="nc" id="L35">            int menu_input = SelectAction(menu_options); // Choose to REVEAL, FLAG, MARK</span>
+<span class="nc" id="L36">            int[] coords = SelectCoords(); // Select cell to do action</span>
 
-<span class="nc" id="L36">            Cell cell_selected = this.grid.GetCell(coords[0], coords[1]);</span>
-<span class="nc bnc" id="L37" title="All 4 branches missed.">            switch(menu_input){</span>
-<span class="nc" id="L38">                case 0 -&gt; RevealCell(cell_selected); // REVEALING</span>
-<span class="nc" id="L39">                case 1 -&gt; FlagCell(cell_selected); // FLAGGING</span>
-<span class="nc" id="L40">                case 2 -&gt; MarkCell(cell_selected); // MARKING</span>
+<span class="nc" id="L38">            Cell cell_selected = this.grid.GetCell(coords[0], coords[1]);</span>
+<span class="nc bnc" id="L39" title="All 4 branches missed.">            switch(menu_input){</span>
+<span class="nc" id="L40">                case 0 -&gt; RevealCell(cell_selected); // REVEALING</span>
+<span class="nc" id="L41">                case 1 -&gt; FlagCell(cell_selected); // FLAGGING</span>
+<span class="nc" id="L42">                case 2 -&gt; MarkCell(cell_selected); // MARKING</span>
 
             }
-<span class="nc" id="L43">        }</span>
+<span class="nc" id="L45">        }</span>
 
         // Reveal grid and (in)correctly flagged cells
-<span class="nc" id="L46">        System.out.println(this.grid.GridString(this.game_in_progress));</span>
+<span class="nc" id="L48">        System.out.println(this.grid.GridString(this.game_in_progress));</span>
 
-<span class="nc" id="L48">        System.out.println(&quot;Correctly flagged:&quot;);</span>
-<span class="nc bnc" id="L49" title="All 4 branches missed.">        for(Cell c : cells_flagged) if(c.GetIsBomb()) System.out.println(&quot;(&quot; + c.GetX() + &quot;,&quot; + c.GetY() + &quot;)&quot;);</span>
+<span class="nc" id="L50">        System.out.println(&quot;Correctly flagged:&quot;);</span>
+<span class="nc bnc" id="L51" title="All 4 branches missed.">        for(Cell c : cells_flagged) if(c.GetIsBomb()) System.out.println(&quot;(&quot; + c.GetX() + &quot;,&quot; + c.GetY() + &quot;)&quot;);</span>
 
-<span class="nc" id="L51">        System.out.println(&quot;Incorrectly flagged:&quot;);</span>
-<span class="nc bnc" id="L52" title="All 4 branches missed.">        for(Cell c : cells_flagged) if(!c.GetIsBomb()) System.out.println(&quot;(&quot; + c.GetX() + &quot;,&quot; + c.GetY() + &quot;)&quot;);</span>
-<span class="nc" id="L53">    }</span>
+<span class="nc" id="L53">        System.out.println(&quot;Incorrectly flagged:&quot;);</span>
+<span class="nc bnc" id="L54" title="All 4 branches missed.">        for(Cell c : cells_flagged) if(!c.GetIsBomb()) System.out.println(&quot;(&quot; + c.GetX() + &quot;,&quot; + c.GetY() + &quot;)&quot;);</span>
+<span class="nc" id="L55">    }</span>
 
 
     // Select to REVEAL, FLAG, MARK
     public int SelectAction(String[] menu_options){
-<span class="nc" id="L58">        int menu_input = -1;</span>
-<span class="nc" id="L59">        boolean menu_confirm = false;</span>
-<span class="nc bnc" id="L60" title="All 2 branches missed.">        while(!menu_confirm) {</span>
-<span class="nc" id="L61">            menu_input = input_handler.InputInteger(&quot;&quot;&quot;</span>
+<span class="nc" id="L60">        int menu_input = -1;</span>
+<span class="nc" id="L61">        boolean menu_confirm = false;</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        while(!menu_confirm) {</span>
+<span class="nc" id="L63">            menu_input = input_handler.InputInteger(&quot;&quot;&quot;</span>
                             Would you like to...
                             0 - REVEAL
                             1 - FLAG/UNFLAG to indicate a potential bomb
                             2 - MARK/UNMARK to place a question mark
                             Please select [0-2]&quot;&quot;&quot;,
-<span class="nc" id="L67">                    0, 2);</span>
+<span class="nc" id="L69">                    0, 2);</span>
 
             // Confirm menu selection
-<span class="nc" id="L70">            String[] options = {&quot;Y&quot;, &quot;N&quot;};</span>
-<span class="nc" id="L71">            String confirm_input = input_handler.InputMenu((&quot;You have chosen to &quot; + menu_options[menu_input] + &quot;. Is this correct? [Y/N]&quot;),</span>
+<span class="nc" id="L72">            String[] options = {&quot;Y&quot;, &quot;N&quot;};</span>
+<span class="nc" id="L73">            String confirm_input = input_handler.InputMenu((&quot;You have chosen to &quot; + menu_options[menu_input] + &quot;. Is this correct? [Y/N]&quot;),</span>
                     options);
 
-<span class="nc bnc" id="L74" title="All 2 branches missed.">            if(confirm_input.equals(&quot;Y&quot;)) menu_confirm = true;</span>
-<span class="nc" id="L75">        }</span>
-<span class="nc" id="L76">        return menu_input;</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">            if(confirm_input.equals(&quot;Y&quot;)) menu_confirm = true;</span>
+<span class="nc" id="L77">        }</span>
+<span class="nc" id="L78">        return menu_input;</span>
     }
     // Select coords to perform action
     public int[] SelectCoords(){
-<span class="nc" id="L80">        int input_x = -1;</span>
-<span class="nc" id="L81">        int input_y = -1;</span>
-<span class="nc" id="L82">        boolean coord_confirm = false;</span>
-<span class="nc bnc" id="L83" title="All 2 branches missed.">        while(!coord_confirm) {</span>
-<span class="nc" id="L84">            input_x = input_handler.InputInteger(&quot;Enter your x-coordinate: &quot;, 1, this.columns) - 1;</span>
-<span class="nc" id="L85">            input_y = input_handler.InputInteger(&quot;Enter your y-coordinate: &quot;, 1, this.rows) - 1;</span>
+<span class="nc" id="L82">        int input_x = -1;</span>
+<span class="nc" id="L83">        int input_y = -1;</span>
+<span class="nc" id="L84">        boolean coord_confirm = false;</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">        while(!coord_confirm) {</span>
+<span class="nc" id="L86">            input_x = input_handler.InputInteger(&quot;Enter your x-coordinate: &quot;, 1, this.columns) - 1;</span>
+<span class="nc" id="L87">            input_y = input_handler.InputInteger(&quot;Enter your y-coordinate: &quot;, 1, this.rows) - 1;</span>
 
-<span class="nc" id="L87">            String[] options = {&quot;Y&quot;, &quot;N&quot;};</span>
-<span class="nc" id="L88">            String confirm_input = input_handler.InputMenu((&quot;You have chosen (&quot; + (input_x+1) + &quot;,&quot; + (input_y+1) +&quot;). Is this correct? [Y/N]&quot;), options);</span>
+<span class="nc" id="L89">            String[] options = {&quot;Y&quot;, &quot;N&quot;};</span>
+<span class="nc" id="L90">            String confirm_input = input_handler.InputMenu((&quot;You have chosen (&quot; + (input_x+1) + &quot;,&quot; + (input_y+1) +&quot;). Is this correct? [Y/N]&quot;), options);</span>
 
-<span class="nc bnc" id="L90" title="All 2 branches missed.">            if(confirm_input.equals(&quot;Y&quot;)) coord_confirm = true;</span>
-<span class="nc" id="L91">        }</span>
-<span class="nc" id="L92">        return new int[]{input_x, input_y};</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">            if(confirm_input.equals(&quot;Y&quot;)) coord_confirm = true;</span>
+<span class="nc" id="L93">        }</span>
+<span class="nc" id="L94">        return new int[]{input_x, input_y};</span>
     }
 
 
@@ -98,172 +100,171 @@ public class Game {
     public void RevealCell(Cell cell_selected){
 
         // Populate grid with bombs if on first move
-<span class="fc bfc" id="L101" title="All 2 branches covered.">        if(this.first_move){</span>
-<span class="fc" id="L102">            PopulateGrid(cell_selected);</span>
-<span class="fc" id="L103">            this.first_move = false;</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        if(this.first_move){</span>
+<span class="fc" id="L104">            PopulateGrid(cell_selected);</span>
+<span class="fc" id="L105">            this.first_move = false;</span>
         }
 
         // Cell is already revealed -&gt; Do nothing
-<span class="fc bfc" id="L107" title="All 2 branches covered.">        if(cell_selected.GetIsRevealed()){</span>
-<span class="fc" id="L108">            System.out.println(&quot;Already revealed.&quot;);</span>
-<span class="fc" id="L109">            return;</span>
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        if(cell_selected.GetIsRevealed()){</span>
+<span class="fc" id="L110">            System.out.println(&quot;Already revealed.&quot;);</span>
+<span class="fc" id="L111">            return;</span>
         }
 
         // Cell is already flagged -&gt; Do nothing
-<span class="fc bfc" id="L113" title="All 2 branches covered.">        if(cell_selected.GetIsFlagged()){</span>
-<span class="fc" id="L114">            System.out.println(&quot;Cannot reveal. Cell is flagged.&quot;);</span>
-<span class="fc" id="L115">            return;</span>
+<span class="fc bfc" id="L115" title="All 2 branches covered.">        if(cell_selected.GetIsFlagged()){</span>
+<span class="fc" id="L116">            System.out.println(&quot;Cannot reveal. Cell is flagged.&quot;);</span>
+<span class="fc" id="L117">            return;</span>
         }
 
         // Cell is already marked -&gt; Do nothing
-<span class="fc bfc" id="L119" title="All 2 branches covered.">        if(cell_selected.GetIsMarked()){</span>
-<span class="fc" id="L120">            System.out.println(&quot;Cannot reveal. Cell is marked.&quot;);</span>
-<span class="fc" id="L121">            return;</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">        if(cell_selected.GetIsMarked()){</span>
+<span class="fc" id="L122">            System.out.println(&quot;Cannot reveal. Cell is marked.&quot;);</span>
+<span class="fc" id="L123">            return;</span>
         }
 
         // Cell is bomb -&gt; End game
-<span class="pc bpc" id="L125" title="1 of 2 branches missed.">        if(cell_selected.GetIsBomb()){</span>
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">        if(cell_selected.GetIsBomb()){</span>
 
-<span class="nc" id="L127">            this.grid.RevealAdjacentCells(cell_selected);</span>
-<span class="nc" id="L128">            System.out.println(&quot;Bomb exploded. GAME OVER.&quot;);</span>
-<span class="nc" id="L129">            this.game_in_progress = false;</span>
-<span class="nc" id="L130">            return;</span>
+<span class="nc" id="L129">            this.grid.RevealAdjacentCells(cell_selected);</span>
+<span class="nc" id="L130">            System.out.println(&quot;Bomb exploded. GAME OVER.&quot;);</span>
+<span class="nc" id="L131">            this.game_in_progress = false;</span>
+<span class="nc" id="L132">            return;</span>
         }
 
         // Reveal selected and adjacent cells if not bomb or flagged
-<span class="pc bpc" id="L134" title="1 of 2 branches missed.">        if(cell_selected.GetBombsNear() &gt;= 0){</span>
-<span class="fc" id="L135">            this.grid.RevealAdjacentCells(cell_selected);</span>
+<span class="pc bpc" id="L136" title="1 of 2 branches missed.">        if(cell_selected.GetBombsNear() &gt;= 0){</span>
+<span class="fc" id="L137">            this.grid.RevealAdjacentCells(cell_selected);</span>
 
             // End game if cells left = number of bombs
-<span class="pc bpc" id="L138" title="1 of 2 branches missed.">            if(this.grid.GetCellsRemaining() == this.number_of_bombs){</span>
-<span class="nc" id="L139">                System.out.println(&quot;Ending game. ALL BOMBS FOUND.&quot;);</span>
-<span class="nc" id="L140">                this.game_in_progress = false;</span>
+<span class="pc bpc" id="L140" title="1 of 2 branches missed.">            if(this.grid.GetCellsRemaining() == this.number_of_bombs){</span>
+<span class="nc" id="L141">                System.out.println(&quot;Ending game. ALL BOMBS FOUND.&quot;);</span>
+<span class="nc" id="L142">                this.game_in_progress = false;</span>
             }
-<span class="fc" id="L142">            return;</span>
+<span class="fc" id="L144">            return;</span>
         }
 
-<span class="nc" id="L145">        System.out.println(&quot;Shouldn't be here (REVEALING)&quot;);</span>
+<span class="nc" id="L147">        System.out.println(&quot;Shouldn't be here (REVEALING)&quot;);</span>
 
-<span class="nc" id="L147">    }</span>
+<span class="nc" id="L149">    }</span>
     public void FlagCell(Cell cell_selected){
 
         // Cell is already revealed -&gt; Do nothing
-<span class="fc bfc" id="L151" title="All 2 branches covered.">        if(cell_selected.GetIsRevealed()){</span>
-<span class="fc" id="L152">            System.out.println(&quot;Cannot flag cell. Already revealed.&quot;);</span>
-<span class="fc" id="L153">            return;</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">        if(cell_selected.GetIsRevealed()){</span>
+<span class="fc" id="L154">            System.out.println(&quot;Cannot flag cell. Already revealed.&quot;);</span>
+<span class="fc" id="L155">            return;</span>
         }
 
         // Cell is already flagged -&gt; Unflag
-<span class="fc bfc" id="L157" title="All 2 branches covered.">        if(cell_selected.GetIsFlagged()){</span>
-<span class="fc" id="L158">            System.out.println(&quot;Unflagging cell.&quot;);</span>
-<span class="fc" id="L159">            cell_selected.SetIsFlagged(false);</span>
-<span class="fc" id="L160">            cells_flagged.remove(cell_selected);</span>
-<span class="fc" id="L161">            return;</span>
+<span class="fc bfc" id="L159" title="All 2 branches covered.">        if(cell_selected.GetIsFlagged()){</span>
+<span class="fc" id="L160">            System.out.println(&quot;Unflagging cell.&quot;);</span>
+<span class="fc" id="L161">            cell_selected.SetIsFlagged(false);</span>
+<span class="fc" id="L162">            cells_flagged.remove(cell_selected);</span>
+<span class="fc" id="L163">            return;</span>
         }
 
         // Cell is not yet flagged -&gt; Check if maximum flags -&gt; Flag and unmark if needed
-<span class="pc bpc" id="L165" title="1 of 2 branches missed.">        if(!cell_selected.GetIsFlagged()){</span>
-<span class="pc bpc" id="L166" title="1 of 2 branches missed.">            if(this.cells_flagged.size() &gt;= this.number_of_bombs){</span>
-<span class="nc" id="L167">                System.out.println(&quot;Cannot flag cell. Maximum number of flags reached. Unflag another flagged cell first.&quot;);</span>
-<span class="nc" id="L168">                return;</span>
+<span class="pc bpc" id="L167" title="1 of 2 branches missed.">        if(!cell_selected.GetIsFlagged()){</span>
+<span class="pc bpc" id="L168" title="1 of 2 branches missed.">            if(this.cells_flagged.size() &gt;= this.number_of_bombs){</span>
+<span class="nc" id="L169">                System.out.println(&quot;Cannot flag cell. Maximum number of flags reached. Unflag another flagged cell first.&quot;);</span>
+<span class="nc" id="L170">                return;</span>
             }
 
-<span class="fc" id="L171">            cell_selected.SetIsMarked(false);</span>
+<span class="fc" id="L173">            cell_selected.SetIsMarked(false);</span>
 
-<span class="fc" id="L173">            System.out.println(&quot;Flagging cell.&quot;);</span>
-<span class="fc" id="L174">            cell_selected.SetIsFlagged(true);</span>
-<span class="fc" id="L175">            this.cells_flagged.add(cell_selected);</span>
+<span class="fc" id="L175">            System.out.println(&quot;Flagging cell.&quot;);</span>
+<span class="fc" id="L176">            cell_selected.SetIsFlagged(true);</span>
+<span class="fc" id="L177">            this.cells_flagged.add(cell_selected);</span>
 
-<span class="fc" id="L177">            return;</span>
+<span class="fc" id="L179">            return;</span>
         }
 
-<span class="nc" id="L180">        System.out.println(&quot;Shouldn't be here... (FLAGGING)&quot;);</span>
-<span class="nc" id="L181">    }</span>
+<span class="nc" id="L182">        System.out.println(&quot;Shouldn't be here... (FLAGGING)&quot;);</span>
+<span class="nc" id="L183">    }</span>
     public void MarkCell(Cell cell_selected){
 
         // Cell is already revealed -&gt; Do nothing
-<span class="fc bfc" id="L185" title="All 2 branches covered.">        if(cell_selected.GetIsRevealed()){</span>
-<span class="fc" id="L186">            System.out.println(&quot;Cannot mark cell. Already revealed.&quot;);</span>
-<span class="fc" id="L187">            return;</span>
+<span class="fc bfc" id="L187" title="All 2 branches covered.">        if(cell_selected.GetIsRevealed()){</span>
+<span class="fc" id="L188">            System.out.println(&quot;Cannot mark cell. Already revealed.&quot;);</span>
+<span class="fc" id="L189">            return;</span>
         }
 
         // Cell is already marked -&gt; Unmark
-<span class="fc bfc" id="L191" title="All 2 branches covered.">        if(cell_selected.GetIsMarked()){</span>
-<span class="fc" id="L192">            System.out.println(&quot;Unmarking cell.&quot;);</span>
-<span class="fc" id="L193">            cell_selected.SetIsMarked(false);</span>
-<span class="fc" id="L194">            return;</span>
+<span class="fc bfc" id="L193" title="All 2 branches covered.">        if(cell_selected.GetIsMarked()){</span>
+<span class="fc" id="L194">            System.out.println(&quot;Unmarking cell.&quot;);</span>
+<span class="fc" id="L195">            cell_selected.SetIsMarked(false);</span>
+<span class="fc" id="L196">            return;</span>
         }
 
         // Cell is not yet marked -&gt; Automatically unflag and mark
-<span class="pc bpc" id="L198" title="1 of 2 branches missed.">        if(!cell_selected.GetIsMarked()){</span>
+<span class="pc bpc" id="L200" title="1 of 2 branches missed.">        if(!cell_selected.GetIsMarked()){</span>
 
-<span class="fc bfc" id="L200" title="All 2 branches covered.">            if(cell_selected.GetIsFlagged()){</span>
-<span class="fc" id="L201">                cells_flagged.remove(cell_selected);</span>
-<span class="fc" id="L202">                cell_selected.SetIsFlagged(false);</span>
+<span class="fc bfc" id="L202" title="All 2 branches covered.">            if(cell_selected.GetIsFlagged()){</span>
+<span class="fc" id="L203">                cells_flagged.remove(cell_selected);</span>
+<span class="fc" id="L204">                cell_selected.SetIsFlagged(false);</span>
             }
 
-<span class="fc" id="L205">            System.out.println(&quot;Marking cell.&quot;);</span>
-<span class="fc" id="L206">            cell_selected.SetIsMarked(true);</span>
+<span class="fc" id="L207">            System.out.println(&quot;Marking cell.&quot;);</span>
+<span class="fc" id="L208">            cell_selected.SetIsMarked(true);</span>
 
-<span class="fc" id="L208">            return;</span>
+<span class="fc" id="L210">            return;</span>
         }
 
-<span class="nc" id="L211">        System.out.println(&quot;Shouldn't be here... (MARKING)&quot;);</span>
-<span class="nc" id="L212">    }</span>
+<span class="nc" id="L213">        System.out.println(&quot;Shouldn't be here... (MARKING)&quot;);</span>
+<span class="nc" id="L214">    }</span>
 
 
 
 
     // Randomly plant bombs
     public void PopulateGrid(Cell first_cell){
-<span class="fc" id="L219">        int bombs_planted = 0;</span>
-<span class="fc" id="L220">        Random rand = new Random();</span>
+<span class="fc" id="L221">        int bombs_planted = 0;</span>
 
         // Convert 2D grid into a 1D list
-<span class="fc" id="L223">        LinkedList&lt;Cell&gt; possible_cells = new LinkedList&lt;&gt;();</span>
-<span class="fc" id="L224">        LinkedList&lt;Cell&gt; adjacent_cells = new LinkedList&lt;&gt;(); // Backup list</span>
-<span class="fc bfc" id="L225" title="All 2 branches covered.">        for(int y = 0; y &lt; this.rows; y++){</span>
-<span class="fc bfc" id="L226" title="All 2 branches covered.">            for(int x = 0; x &lt; this.columns; x++){</span>
-<span class="fc bfc" id="L227" title="All 4 branches covered.">                if(Math.abs(x - first_cell.GetX()) &lt;= 1 &amp;&amp; Math.abs(y - first_cell.GetY()) &lt;= 1){</span>
-<span class="fc" id="L228">                    adjacent_cells.add(this.grid.GetCell(x,y));</span>
+<span class="fc" id="L224">        LinkedList&lt;Cell&gt; possible_cells = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L225">        LinkedList&lt;Cell&gt; adjacent_cells = new LinkedList&lt;&gt;(); // Backup list</span>
+<span class="fc bfc" id="L226" title="All 2 branches covered.">        for(int y = 0; y &lt; this.rows; y++){</span>
+<span class="fc bfc" id="L227" title="All 2 branches covered.">            for(int x = 0; x &lt; this.columns; x++){</span>
+<span class="fc bfc" id="L228" title="All 4 branches covered.">                if(Math.abs(x - first_cell.GetX()) &lt;= 1 &amp;&amp; Math.abs(y - first_cell.GetY()) &lt;= 1){</span>
+<span class="fc" id="L229">                    adjacent_cells.add(this.grid.GetCell(x,y));</span>
                 }
                 else{
-<span class="fc" id="L231">                    possible_cells.add(this.grid.GetCell(x,y));</span>
+<span class="fc" id="L232">                    possible_cells.add(this.grid.GetCell(x,y));</span>
                 }
             }
         }
 
-<span class="fc" id="L236">        possible_cells.remove(first_cell); // Don't place bomb on first cell</span>
-<span class="fc" id="L237">        adjacent_cells.remove(first_cell);</span>
-<span class="fc" id="L238">        LinkedList&lt;Cell&gt; select_from = possible_cells;</span>
+<span class="fc" id="L237">        possible_cells.remove(first_cell); // Don't place bomb on first cell</span>
+<span class="fc" id="L238">        adjacent_cells.remove(first_cell);</span>
+<span class="fc" id="L239">        LinkedList&lt;Cell&gt; select_from = possible_cells;</span>
 
         // Repeat until bomb threshold reached from list of available cells
-<span class="fc bfc" id="L241" title="All 2 branches covered.">        while(bombs_planted &lt; this.number_of_bombs){</span>
+<span class="fc bfc" id="L242" title="All 2 branches covered.">        while(bombs_planted &lt; this.number_of_bombs){</span>
 
-<span class="fc bfc" id="L243" title="All 2 branches covered.">            if(possible_cells.isEmpty()) select_from = adjacent_cells; // Use adjacent cells if no other cell possible</span>
+<span class="fc bfc" id="L244" title="All 2 branches covered.">            if(possible_cells.isEmpty()) select_from = adjacent_cells; // Use adjacent cells if no other cell possible</span>
 
             // Select random cell to plant bomb
-<span class="fc" id="L246">            int random_ind = rand.nextInt(select_from.size());</span>
-<span class="fc" id="L247">            Cell random_cell = select_from.get(random_ind);</span>
+<span class="fc" id="L247">            int random_ind = rand.nextInt(select_from.size());</span>
+<span class="fc" id="L248">            Cell random_cell = select_from.get(random_ind);</span>
 
-<span class="fc" id="L249">            int random_x = random_cell.GetX();</span>
-<span class="fc" id="L250">            int random_y = random_cell.GetY();</span>
+<span class="fc" id="L250">            int random_x = random_cell.GetX();</span>
+<span class="fc" id="L251">            int random_y = random_cell.GetY();</span>
 
-<span class="fc" id="L252">            select_from.remove(random_ind); // Remove from remaining possible cells</span>
-<span class="fc" id="L253">            random_cell.SetIsBomb(true); // Plant bomb on selected cell</span>
+<span class="fc" id="L253">            select_from.remove(random_ind); // Remove from remaining possible cells</span>
+<span class="fc" id="L254">            random_cell.SetIsBomb(true); // Plant bomb on selected cell</span>
 
             // Update adjacent counters
-<span class="fc bfc" id="L256" title="All 2 branches covered.">            for(int x = random_x-1; x &lt;= random_x+1; x++){</span>
-<span class="fc bfc" id="L257" title="All 4 branches covered.">                if(x &lt; 0 || x &gt;= this.columns) continue; // Skip out-of-bounds</span>
+<span class="fc bfc" id="L257" title="All 2 branches covered.">            for(int x = random_x-1; x &lt;= random_x+1; x++){</span>
+<span class="fc bfc" id="L258" title="All 4 branches covered.">                if(x &lt; 0 || x &gt;= this.columns) continue; // Skip out-of-bounds</span>
 
-<span class="fc bfc" id="L259" title="All 2 branches covered.">                for(int y = random_y-1; y &lt;= random_y+1; y++){</span>
-<span class="fc bfc" id="L260" title="All 4 branches covered.">                    if(y &lt; 0 || y &gt;= this.rows) continue; // Skip out-of-bounds</span>
+<span class="fc bfc" id="L260" title="All 2 branches covered.">                for(int y = random_y-1; y &lt;= random_y+1; y++){</span>
+<span class="fc bfc" id="L261" title="All 4 branches covered.">                    if(y &lt; 0 || y &gt;= this.rows) continue; // Skip out-of-bounds</span>
 
-<span class="fc" id="L262">                    this.grid.GetCell(x,y).IncrementBombsNear();</span>
+<span class="fc" id="L263">                    this.grid.GetCell(x,y).IncrementBombsNear();</span>
                 }
             }
-<span class="fc" id="L265">            ++bombs_planted; // Update bomb counter</span>
-<span class="fc" id="L266">        }</span>
-<span class="fc" id="L267">    }</span>
+<span class="fc" id="L266">            ++bombs_planted; // Update bomb counter</span>
+<span class="fc" id="L267">        }</span>
+<span class="fc" id="L268">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

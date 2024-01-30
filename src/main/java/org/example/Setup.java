@@ -30,7 +30,7 @@ public class Setup {
                 }
             }
             if(game != null) game.PlayGame(); // Begin game
-            
+
             if(end_setup) break;
         }
 
