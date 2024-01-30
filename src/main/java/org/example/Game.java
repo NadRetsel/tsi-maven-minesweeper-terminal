@@ -8,7 +8,7 @@ public class Game {
     private final Random rand = new Random();
     private final InputHandler input_handler = new InputHandler();
     public final Grid grid;
-    private final LinkedList<Cell> cells_flagged;
+    public final LinkedList<Cell> cells_flagged;
     private final int rows, columns, number_of_bombs;
     public boolean first_move, game_in_progress;
 

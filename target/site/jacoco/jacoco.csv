@@ -2,7 +2,7 @@ GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_
 MavenMinesweeperTerminal,org.example,Grid,183,144,34,26,31,26,19,17,1,5
 MavenMinesweeperTerminal,org.example,Main,13,0,0,0,5,0,2,0,2,0
 MavenMinesweeperTerminal,org.example,OutOfRangeException,3,0,0,0,2,0,1,0,1,0
-MavenMinesweeperTerminal,org.example,Game,264,332,26,50,49,89,19,28,3,5
+MavenMinesweeperTerminal,org.example,Game,266,330,26,50,49,89,19,28,3,5
 MavenMinesweeperTerminal,org.example,Setup,167,0,17,0,30,0,13,0,3,0
 MavenMinesweeperTerminal,org.example,Cell,0,68,0,0,0,26,0,13,0,13
 MavenMinesweeperTerminal,org.example,AnsiColours,3,0,0,0,1,0,1,0,1,0

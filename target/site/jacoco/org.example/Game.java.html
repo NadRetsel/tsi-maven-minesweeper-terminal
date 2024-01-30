@@ -8,7 +8,7 @@ public class Game {
 <span class="fc" id="L8">    private final Random rand = new Random();</span>
 <span class="fc" id="L9">    private final InputHandler input_handler = new InputHandler();</span>
     public final Grid grid;
-    private final LinkedList&lt;Cell&gt; cells_flagged;
+    public final LinkedList&lt;Cell&gt; cells_flagged;
     private final int rows, columns, number_of_bombs;
     public boolean first_move, game_in_progress;
 
@@ -137,9 +137,9 @@ public class Game {
 <span class="fc" id="L137">            this.grid.RevealAdjacentCells(cell_selected);</span>
 
             // End game if cells left = number of bombs
-<span class="fc bfc" id="L140" title="All 2 branches covered.">            if(this.grid.GetCellsRemaining() == this.number_of_bombs){</span>
-<span class="fc" id="L141">                System.out.println(&quot;Ending game. ALL BOMBS FOUND.&quot;);</span>
-<span class="fc" id="L142">                this.game_in_progress = false;</span>
+<span class="pc bpc" id="L140" title="1 of 2 branches missed.">            if(this.grid.GetCellsRemaining() == this.number_of_bombs){</span>
+<span class="nc" id="L141">                System.out.println(&quot;Ending game. ALL BOMBS FOUND.&quot;);</span>
+<span class="nc" id="L142">                this.game_in_progress = false;</span>
             }
 <span class="fc" id="L144">            return;</span>
         }
@@ -165,9 +165,9 @@ public class Game {
 
         // Cell is not yet flagged -&gt; Check if maximum flags -&gt; Flag and unmark if needed
 <span class="pc bpc" id="L167" title="1 of 2 branches missed.">        if(!cell_selected.GetIsFlagged()){</span>
-<span class="pc bpc" id="L168" title="1 of 2 branches missed.">            if(this.cells_flagged.size() &gt;= this.number_of_bombs){</span>
-<span class="nc" id="L169">                System.out.println(&quot;Cannot flag cell. Maximum number of flags reached. Unflag another flagged cell first.&quot;);</span>
-<span class="nc" id="L170">                return;</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">            if(this.cells_flagged.size() &gt;= this.number_of_bombs){</span>
+<span class="fc" id="L169">                System.out.println(&quot;Cannot flag cell. Maximum number of flags reached. Unflag another flagged cell first.&quot;);</span>
+<span class="fc" id="L170">                return;</span>
             }
 
 <span class="fc" id="L173">            cell_selected.SetIsMarked(false);</span>

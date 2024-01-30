@@ -170,6 +170,16 @@ public class TestGame {
         game.MarkCell(cell);
         game.MarkCell(cell);
         Assertions.assertFalse(cell.GetIsFlagged(), "Cell should not be flagged by flagging then unmarking");
+
+        game = new Game(10, 10, 10);
+        for(int x = 0; x < 10; ++x){
+            for(int y = 0; y < 10; ++y){
+                game.FlagCell(game.grid.grid_of_cells[x][y]);
+            }
+        }
+        Assertions.assertEquals(10, game.cells_flagged.size(), "Too many cells flagged");
+
+
     }
 
     @Test
